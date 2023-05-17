@@ -41,21 +41,15 @@ func main() {
 	}
 	fmt.Println("TOTAL : ", total)
 
+	mu := num * (1.0 + side) / 2.0
+	sigma := math.Sqrt(float64(num) * (1.0 + math.Pow(float64(side), 2.0)) / 12.0)
 	if thresh == 0 {
-		denom := math.Pow(side, num)
-		//TODO make this more efficient :)
-		average := float64(total) / num
-		lessthan := 0.0
-		for i := 1; i <= int(num); i++ {
-			roll := 0
-			for j := 1; i <= int(side); i++ {
-				if i + j > int(average) {
-					roll += // CONFUSE
-				}
-			}
-		}
-		prob := lessthan / denom
-		fmt.Println("Probability of roll : ", prob)
+		zscore := (float64(total) - mu) / sigma
+		cdf := math.Abs(0.5 * (1 + math.Erf(zscore / math.Sqrt2)))
+		fmt.Println("Percentile of roll : ", math.Round(cdf * 100))
 	} else {
+		zscore := (float64(thresh) - mu) / sigma
+		cdf := math.Abs(0.5 * (1 + math.Erf(zscore / math.Sqrt2)))
+		fmt.Println("CDF of thresh : ", cdf)
 	}
 }
