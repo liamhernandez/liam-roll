@@ -9,5 +9,4 @@ For example, "4d6t16"  will show the chance of meeting the threshold, and on cli
 
 I plan to serve the website at roll.liamism.com.
 
-
-I will use Go compiled to WebAssembly for the
+I think I will have a ZZ
